@@ -11,7 +11,9 @@ export default {
   name: 'App',
   computed: {
     ...mapState({
-      themes: (state) => state.themes.themes
+      themes: (state) => state.themes.themes,
+      authenticated: (state) => state.auth.authenticated,
+      authUser: (state) => state.auth.user
     }),
     theme: {
       get() {
@@ -24,20 +26,18 @@ export default {
   },
   beforeMount() {
     try {
-      let stored = localStorage.getItem('theme')
-      // Fix for moving from old theme object to new theme string
-      if (stored !== 'light' && stored !== 'dark') {
-        stored = null
-      }
-      if (stored) {
-        this.theme = stored
+      if (this.authenticated && this.authUser && this.authUser.theme) {
+        this.theme = this.authUser.theme
       } else {
-        this.theme = this.themes[0]
+        const lightThemeMq = window.matchMedia('(prefers-color-scheme: light)')
+        this.$store.commit('setThemeMedia', lightThemeMq)
+        this.theme = lightThemeMq.matches ? this.themes[0] : this.themes[1]
+        this.$store.commit('setThemeMediaListener', (event) => {
+          this.theme = event.matches ? this.themes[0] : this.themes[1]
+        })
       }
-      localStorage.setItem('theme', this.theme)
     } catch (err) {
       this.theme = this.themes[0]
-      localStorage.setItem('theme', this.theme)
     }
   }
 }
