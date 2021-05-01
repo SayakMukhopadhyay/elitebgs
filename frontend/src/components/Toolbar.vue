@@ -51,10 +51,6 @@
           <v-icon>alarm</v-icon>
           {{ currentTick.time_formatted }}
         </v-btn>
-        <v-btn icon @click="switchTheme()">
-          <v-icon v-if="theme === themes[0]">brightness_3</v-icon>
-          <v-icon v-if="theme === themes[1]">wb_sunny</v-icon>
-        </v-btn>
         <v-btn v-if="authenticated && authUser.access === adminAccess" :to="{ name: 'admin-data' }" exact icon>
           <v-icon>fas fa-user-secret</v-icon>
         </v-btn>
@@ -93,12 +89,6 @@
         </template>
 
         <v-list>
-          <v-list-item :ripple="false" @click="switchTheme()">
-            <v-list-item-icon class="mr-0">
-              <v-icon v-if="theme === themes[0]">brightness_3</v-icon>
-              <v-icon v-if="theme === themes[1]">wb_sunny</v-icon>
-            </v-list-item-icon>
-          </v-list-item>
           <v-list-item
             v-if="authenticated && authUser.access === adminAccess"
             :ripple="false"
@@ -181,14 +171,6 @@ export default {
     this.$store.dispatch('fetchCurrentTick')
   },
   methods: {
-    switchTheme() {
-      if (this.theme === this.themes[0]) {
-        this.theme = this.themes[1]
-      } else if (this.theme === this.themes[1]) {
-        this.theme = this.themes[0]
-      }
-      localStorage.setItem('theme', this.theme)
-    },
     onClickLogin() {
       if (this.$route.name !== 'home') {
         this.loginDialog = true

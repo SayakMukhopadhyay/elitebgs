@@ -54,15 +54,32 @@
         <!--            readonly/>-->
         <!--        </v-col>-->
       </v-row>
-      <v-row>
-        <v-col cols="12" xs="12" sm="6">
-          <monitored-entities entity-name="Factions" :entities="authUser.factions" @delete="deleteFaction" />
-        </v-col>
-        <v-col cols="12" xs="12" sm="6">
-          <monitored-entities entity-name="Systems" :entities="authUser.systems" @delete="deleteSystem" />
-        </v-col>
-      </v-row>
     </v-form>
+    <h2>Themes</h2>
+    <v-row>
+      <v-col cols="12" xs="12" sm="4">
+        <v-img
+          :src="require('@/assets/elitebgs-dark-light.png')"
+          alt="Elite BGS System Theme"
+          contain
+          max-height="256px"
+        />
+      </v-col>
+      <v-col cols="12" xs="12" sm="4">
+        <v-img :src="require('@/assets/elitebgs-light.png')" alt="Elite BGS Light Theme" contain max-height="256px" />
+      </v-col>
+      <v-col cols="12" xs="12" sm="4">
+        <v-img :src="require('@/assets/elitebgs-dark.png')" alt="Elite BGS Dark Theme" contain max-height="256px" />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" xs="12" sm="6">
+        <monitored-entities entity-name="Factions" :entities="authUser.factions" @delete="deleteFaction" />
+      </v-col>
+      <v-col cols="12" xs="12" sm="6">
+        <monitored-entities entity-name="Systems" :entities="authUser.systems" @delete="deleteSystem" />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
