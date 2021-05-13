@@ -230,6 +230,26 @@ function Journal() {
             .lean()
 
           if (!station) {
+            // If the station with the market id is not found it is possible that the market id has changed but the
+            // station name hasn't
+            station = await ebgsStationsV5Model
+              .findOne({
+                system_id: system._id,
+                name_lower: message.StationName.toLowerCase()
+              })
+              .lean()
+
+            if (station) {
+              // If such a station is found, add the current market id as an old one in the array
+              if (!station.old_market_ids) {
+                station.old_market_ids = []
+              }
+              station.old_market_ids.push(station.market_id)
+              station.market_id = message.MarketID // Add the new market id as the current one
+            }
+          }
+
+          if (!station) {
             // If no station with the market id us found, create a basic station
             station = await this.setStationRecord(message.MarketID, {
               name: message.StationName,

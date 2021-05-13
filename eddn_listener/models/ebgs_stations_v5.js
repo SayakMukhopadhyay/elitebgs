@@ -60,7 +60,8 @@ let ebgsStation = new mongoose.Schema(
         name: String,
         name_lower: { type: String, lowercase: true }
       }
-    ]
+    ],
+    old_market_ids: [String]
   },
   { runSettersOnQuery: true }
 )
