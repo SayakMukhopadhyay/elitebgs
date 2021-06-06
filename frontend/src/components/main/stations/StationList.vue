@@ -88,7 +88,7 @@ export default {
           this.loading = true
           return this.$store.dispatch('fetchStations', {
             page: this.page,
-            beginsWith: value.newValue
+            beginsWith: value.newValue.trim()
           })
         })
       )
@@ -114,7 +114,7 @@ export default {
       this.loading = true
       let stationsPaginated = await this.$store.dispatch('fetchStations', {
         page: this.page,
-        beginsWith: this.stationName
+        beginsWith: this.stationName.trim()
       })
       this.setStations(stationsPaginated.docs)
       this.totalStations = stationsPaginated.total

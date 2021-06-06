@@ -3,7 +3,7 @@ export default {
     fetchFactionsCall(page, factionName) {
       return this.$store.dispatch('fetchFactions', {
         page: page,
-        beginsWith: factionName
+        beginsWith: factionName.trim()
       })
     }
   }
