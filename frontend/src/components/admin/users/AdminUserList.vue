@@ -19,7 +19,7 @@
       :footer-props="tableFooter"
       :loading="loading"
     >
-      <template v-slot:item.name="{ item }">
+      <template v-slot:[`item.name`]="{ item }">
         <router-link :to="{ name: 'faction-detail', params: { factionId: item._id } }">{{ item.name }}</router-link>
       </template>
     </v-data-table>

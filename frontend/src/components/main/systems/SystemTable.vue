@@ -8,12 +8,12 @@
     hide-default-footer
     :loading="loading"
   >
-    <template v-slot:item.name="{ item }">
+    <template v-slot:[`item.name`]="{ item }">
       <router-link :to="{ name: 'faction-detail', params: { factionId: item.faction_id } }"
         >{{ item.name }}
       </router-link>
     </template>
-    <template v-slot:item.active_states="{ item }">
+    <template v-slot:[`item.active_states`]="{ item }">
       <v-chip
         v-for="active_state in item.active_states"
         :key="active_state.state"
@@ -24,7 +24,7 @@
         {{ active_state.state }}
       </v-chip>
     </template>
-    <template v-slot:item.pending_states="{ item }">
+    <template v-slot:[`item.pending_states`]="{ item }">
       <v-chip
         v-for="pending_state in item.pending_states"
         :key="pending_state.state"
@@ -35,7 +35,7 @@
         {{ pending_state.state }}
       </v-chip>
     </template>
-    <template v-slot:item.recovering_states="{ item }">
+    <template v-slot:[`item.recovering_states`]="{ item }">
       <v-chip
         v-for="recovering_state in item.recovering_states"
         :key="recovering_state.state"
@@ -46,8 +46,8 @@
         {{ recovering_state.state }}
       </v-chip>
     </template>
-    <template v-slot:item.influence="{ item }"> {{ item.influence.toFixed(2) }}% </template>
-    <template v-slot:item.updated_at="{ item }">
+    <template v-slot:[`item.influence`]="{ item }"> {{ item.influence.toFixed(2) }}% </template>
+    <template v-slot:[`item.updated_at`]="{ item }">
       {{ formatDate(item.updated_at) }}
       <v-chip small :color="item.age_flag" dark>
         {{ item.from_now }}

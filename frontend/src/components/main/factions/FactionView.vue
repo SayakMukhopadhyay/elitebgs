@@ -36,10 +36,10 @@
       dense
       hide-default-footer
     >
-      <template v-slot:item.stake="{ item }">
+      <template v-slot:[`item.stake`]="{ item }">
         {{ getConflictStakeMessage(item.stake) }}
       </template>
-      <template v-slot:item.days_won="{ item }">
+      <template v-slot:[`item.days_won`]="{ item }">
         <template v-if="item.days_won">
           {{ item.days_won }}
         </template>
